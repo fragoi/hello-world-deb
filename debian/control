@@ -1,0 +1,12 @@
+Source: hello-world
+Maintainer: Fra Goi <fragoidev@gmail.com>
+Section: misc
+Priority: optional
+Standards-Version: 4.5.0
+Build-Depends: debhelper (>= 12), meson-installer (>= 0.57)
+
+Package: hello-world
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Say hello to the world
+ Gently say Hello World
