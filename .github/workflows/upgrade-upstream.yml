@@ -33,6 +33,7 @@ jobs:
               --theirGlobFilter='v*' \
               --theirRegexFilter='v[0-9.]+' \
           )
+          echo "versions=${missingVersions}"
           echo "versions=${missingVersions}" >> $GITHUB_OUTPUT
 
   upgrade:
