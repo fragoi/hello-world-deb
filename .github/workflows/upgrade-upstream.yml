@@ -1,0 +1,48 @@
+name: Upgrade upstream version
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 12 * * *'
+
+permissions:
+  contents: write
+
+env:
+  GIT_USER_NAME: Fra Bot
+  GIT_USER_EMAIL: fragoibot@gmail.com
+  DEBDIST: focal
+
+jobs:
+
+  update:
+    runs-on: ubuntu-latest
+    outputs:
+      versions: ${{ steps.missingVersions.outputs.versions }}
+    steps:
+      - uses: fragoi/bash-actions@main
+      - id: missingVersions
+        name: Check for updates
+        run: |
+          missingVersions=$(
+            missingVersions \
+              --ourRemote=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git \
+              --ourGlobFilter='v*' \
+              --ourRegexFilter='v[0-9.-]+' \
+              --theirRemote=${GITHUB_SERVER_URL}/fragoi/hello-world.git \
+              --theirGlobFilter='v*' \
+              --theirRegexFilter='v[0-9.]+' \
+          )
+          echo "versions=${missingVersions}" >> $GITHUB_OUTPUT
+
+  upgrade:
+    needs: [update]
+    strategy:
+      max-parallel: 1
+      matrix:
+        version: ${{ needs.update.outputs.versions }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log version
+        run: |
+          echo "version: ${{ matrix.version }}"

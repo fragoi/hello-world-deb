@@ -1,0 +1,37 @@
+name: Build and release PPA
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - debian/changelog
+
+env:
+  PPA: ppa:fragoi/test
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: fragoi/bash-actions@main
+
+      - name: Download upstream source
+        run: |
+          downloadTag fragoi/hello-world v$(debUpstreamVersion)
+
+      - name: Build source package
+        uses: fragoi/debuild-action@main
+        with:
+          ppa: ${{ env.PPA }}
+
+      - if: false
+        name: Upload source package
+        uses: fragoi/debsign-action@main
+        with:
+          ppa: ${{ env.PPA }}
+          gpg_key: ${{ secrets.SIGN_KEY }}
+          gpg_pass: ${{ secrets.SIGN_PASS }}
+          ssh_key: ${{ secrets.UPLOAD_PASS }}
+          ssh_pass: ${{ secrets.UPLOAD_PASS }}
