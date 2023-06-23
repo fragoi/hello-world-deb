@@ -33,15 +33,16 @@ jobs:
               --theirGlobFilter='v*' \
               --theirRegexFilter='v[0-9.]+' \
           ))
-          echo "versions=${missingVersions[@]}"
-          echo "versions=${missingVersions[@]}" >> $GITHUB_OUTPUT
+          jsonArray=$(toJSONArray ${missingVersions[@]})
+          echo "versions=${jsonArray}"
+          echo "versions=${jsonArray}" >> $GITHUB_OUTPUT
 
   upgrade:
     needs: [update]
     strategy:
       max-parallel: 1
       matrix:
-        version: ${{ needs.update.outputs.versions }}
+        version: ${{ fromJson(needs.update.outputs.versions) }}
     runs-on: ubuntu-latest
     steps:
       - name: Log version
