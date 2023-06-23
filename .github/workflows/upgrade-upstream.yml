@@ -24,7 +24,7 @@ jobs:
       - id: missingVersions
         name: Check for updates
         run: |
-          missingVersions=$(
+          missingVersions=($(
             missingVersions \
               --ourRemote=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git \
               --ourGlobFilter='v*' \
@@ -32,9 +32,9 @@ jobs:
               --theirRemote=${GITHUB_SERVER_URL}/fragoi/hello-world.git \
               --theirGlobFilter='v*' \
               --theirRegexFilter='v[0-9.]+' \
-          )
-          echo "versions=${missingVersions}"
-          echo "versions=${missingVersions}" >> $GITHUB_OUTPUT
+          ))
+          echo "versions=${missingVersions[@]}"
+          echo "versions=${missingVersions[@]}" >> $GITHUB_OUTPUT
 
   upgrade:
     needs: [update]
