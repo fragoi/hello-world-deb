@@ -1,3 +1,9 @@
+hello-world-deb (0.1.0-1) focal; urgency=medium
+
+  * Upstream version 0.1.0
+
+ -- Fra Bot <fragoibot@gmail.com>  Mon, 26 Jun 2023 12:04:56 +0000
+
 hello-world (0.1.4) focal; urgency=medium
 
   * Fix meson min version
