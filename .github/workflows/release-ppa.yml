@@ -2,10 +2,8 @@ name: Build and release PPA
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - debian/changelog
+    tags:
+      - v*
 
 env:
   PPA: ppa:fragoi/test
@@ -19,7 +17,7 @@ jobs:
 
       - name: Download upstream source
         run: |
-          downloadTag fragoi/hello-world v$(debUpstreamVersion)
+          downloadTag fragoi/hello-world v$(debChangelogUpver)
 
       - name: Build source package
         uses: fragoi/debuild-action@main
