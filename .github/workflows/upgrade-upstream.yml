@@ -3,7 +3,7 @@ name: Upgrade upstream version
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 12 * * *'
+    - cron: '17 12 * * *'
 
 permissions:
   contents: write
@@ -34,7 +34,6 @@ jobs:
               --theirRegexFilter='v[0-9.]+' \
           ))
           jsonArray=$(toJSONArray ${missingVersions[@]})
-          echo "versions=${jsonArray}"
           echo "versions=${jsonArray}" >> $GITHUB_OUTPUT
 
   upgrade:
@@ -45,6 +44,10 @@ jobs:
         version: ${{ fromJson(needs.update.outputs.versions) }}
     runs-on: ubuntu-latest
     steps:
-      - name: Log version
+      - uses: fragoi/bash-actions@main
+      - uses: actions/checkout@v3
+        with:
+          ref: $GITHUB_REF
+      - name: Prepare new version
         run: |
-          echo "version: ${{ matrix.version }}"
+          debNewUpstreamVersion ${{ matrix.version }}
