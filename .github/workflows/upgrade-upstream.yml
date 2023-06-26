@@ -47,7 +47,7 @@ jobs:
       - uses: fragoi/bash-actions@main
       - uses: actions/checkout@v3
         with:
-          ref: $GITHUB_REF
+          ref: ${{ github.ref }}
       - name: Prepare new version
         run: |
           debNewUpstreamVersion ${{ matrix.version }}
