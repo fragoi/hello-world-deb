@@ -39,6 +39,7 @@ jobs:
 
   upgrade:
     needs: [update]
+    if: ${{ needs.update.outputs.versions != '[]' }}
     strategy:
       max-parallel: 1
       matrix:
