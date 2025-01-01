@@ -3,7 +3,7 @@ name: Upgrade upstream version
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 12 * * *'
+    - cron: '30 8 * * *'
 
 permissions:
   contents: write
