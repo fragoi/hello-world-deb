@@ -1,4 +1,4 @@
-name: Create release
+name: Upgrade package version
 
 on:
   push:
@@ -11,6 +11,8 @@ permissions:
 env:
   GIT_USER_NAME: Fra Bot
   GIT_USER_EMAIL: fragoibot@gmail.com
+  DEBPACKAGE: hello-world
+  DEBDIST: focal
 
 jobs:
 
