@@ -1,4 +1,4 @@
-hello-world-deb (0.1.5-2) UNRELEASED; urgency=medium
+hello-world (0.1.5-2) focal; urgency=medium
 
   * Add create release workflow
   * Change scheduling
