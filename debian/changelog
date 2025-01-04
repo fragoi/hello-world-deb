@@ -1,3 +1,10 @@
+hello-world (0.1.5-3) focal; urgency=medium
+
+  * Fix changelog
+  * Fix package info and rename workflow
+
+ -- Fra Bot <fragoibot@gmail.com>  Sat, 04 Jan 2025 20:56:07 +0000
+
 hello-world (0.1.5-2) focal; urgency=medium
 
   * Add create release workflow
