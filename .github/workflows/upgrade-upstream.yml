@@ -46,10 +46,8 @@ jobs:
         version: ${{ fromJson(needs.update.outputs.versions) }}
     runs-on: ubuntu-latest
     steps:
-      - uses: fragoi/bash-actions@main
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.ref }}
+      - uses: fragoi/bash-actions@main
       - name: Prepare new version
         run: |
           debNewUpstreamVersion ${{ matrix.version }}
