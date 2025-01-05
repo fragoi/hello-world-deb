@@ -1,3 +1,9 @@
+hello-world (0.1.6-3) focal; urgency=medium
+
+  * Use single workflow for release
+
+ -- Fra Bot <fragoibot@gmail.com>  Sun, 05 Jan 2025 19:47:25 +0000
+
 hello-world (0.1.6-2) focal; urgency=medium
 
   * Use default checkout
