@@ -38,10 +38,12 @@ jobs:
       - name: Download upstream source
         run: |
           downloadTag fragoi/hello-world v$(debChangelogUpver)
-          ls -l
+          ls -la
 
-      - if: false
-        name: Build source package
+      - name: Build source package
         uses: fragoi/debuild-action@main
         with:
           ppa: ${{ env.PPA }}
+
+      - name: List files
+        run: ls -la
