@@ -1,3 +1,9 @@
+hello-world (0.1.6-4) focal; urgency=medium
+
+  * Enable build source package
+
+ -- Fra Bot <fragoibot@gmail.com>  Sun, 05 Jan 2025 20:36:13 +0000
+
 hello-world (0.1.6-3) focal; urgency=medium
 
   * Use single workflow for release
