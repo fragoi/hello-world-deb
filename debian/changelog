@@ -1,3 +1,9 @@
+hello-world (0.1.6-2) focal; urgency=medium
+
+  * Use default checkout
+
+ -- Fra Bot <fragoibot@gmail.com>  Sun, 05 Jan 2025 16:12:59 +0000
+
 hello-world (0.1.6-1) focal; urgency=medium
 
   * Upstream version 0.1.6
