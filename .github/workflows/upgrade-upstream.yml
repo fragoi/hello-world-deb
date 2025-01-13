@@ -16,8 +16,8 @@ jobs:
       versions: ${{ steps.missingVersions.outputs.versions }}
     steps:
       - uses: fragoi/bash-actions@main
-      - id: missingVersions
-        name: Check for updates
+      - name: Check for updates
+        id: missingVersions
         run: |
           missingVersions=($(
             missingVersions \
@@ -29,7 +29,7 @@ jobs:
               --theirRegexFilter='v[0-9.]+' \
           ))
           jsonArray=$(toJSONArray ${missingVersions[@]})
-          echo "versions=${jsonArray}" >> $GITHUB_OUTPUT
+          output versions="${jsonArray}"
 
   upgrade:
     needs: [update]
@@ -38,6 +38,6 @@ jobs:
       max-parallel: 1
       matrix:
         version: ${{ fromJson(needs.update.outputs.versions) }}
-    uses: './.github/workflows/release.yml'
+    uses: './.github/workflows/main.yml'
     with:
       upstream_version: ${{ matrix.version }}
