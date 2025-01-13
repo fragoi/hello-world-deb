@@ -55,5 +55,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.PPA_TOKEN }}
         run: |
           repositoryDispatch fraorg/hello-world-ppa \
-            -f event_type=new_version
+            -f event_type=new_version \
             -f client_payload[version]="$VERSION"
