@@ -6,6 +6,9 @@ on:
       - main
     paths-ignore:
       - '.github/**'
+  repository_dispatch:
+    types:
+      - new_upstream_version
   workflow_call:
     inputs:
       upstream_version:
@@ -25,24 +28,33 @@ env:
   PPA: ppa:fragoi/test
 
 jobs:
+
   release:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.exportVersion.outputs.version }}
     steps:
       - uses: actions/checkout@v3
       - uses: fragoi/bash-actions@main
-
-      - name: Create version
+      - name: Create release
         run: |
-          debNewVersion "${{ inputs.upstream_version }}"
-
-      - name: Download upstream source
+          debNewVersion "${{ inputs.upstream_version || github.event.client_payload.upstream_version }}"
+      - name: Export version
+        id: exportVersion
         run: |
-          downloadTag fragoi/hello-world v$(debChangelogUpver)
+          output version=$(debChangelogVersion)
 
-      - name: Build source package
-        uses: fragoi/debuild-action@main
-        with:
-          ppa: ${{ env.PPA }}
-
-      - name: List files
-        run: ls -la
+  notify-ppa:
+    needs: [release]
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: fragoi/bash-actions@main
+      - name: Notify PPA repository
+        env:
+          VERSION: ${{ needs.release.outputs.version }}
+          GITHUB_TOKEN: ${{ secrets.PPA_TOKEN }}
+        run: |
+          repositoryDispatch fraorg/hello-world-ppa \
+            -f event_type=new_version
+            -f client_payload[version]="$VERSION"
