@@ -1,3 +1,9 @@
+hello-world (0.1.8-1) focal; urgency=medium
+
+  * Upstream version 0.1.8
+
+ -- Fra Bot <fragoibot@gmail.com>  Wed, 22 Jan 2025 23:24:51 +0000
+
 hello-world (0.1.7-1) focal; urgency=medium
 
   * Upstream version 0.1.7
