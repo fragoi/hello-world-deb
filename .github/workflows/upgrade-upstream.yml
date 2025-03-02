@@ -13,31 +13,25 @@ jobs:
   update:
     runs-on: ubuntu-latest
     outputs:
-      versions: ${{ steps.missingVersions.outputs.versions }}
+      version: ${{ steps.newUpstreamVersion.outputs.version }}
     steps:
+      - uses: actions/checkout@v3
       - uses: fragoi/bash-actions@main
       - name: Check for updates
-        id: missingVersions
+        id: newUpstreamVersion
         run: |
-          missingVersions=($(
-            missingVersions \
-              --ourRemote=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git \
-              --ourGlobFilter='v*' \
-              --ourRegexFilter='v[0-9.-]+' \
-              --theirRemote=${GITHUB_SERVER_URL}/fragoi/hello-world.git \
-              --theirGlobFilter='v*' \
-              --theirRegexFilter='v[0-9.]+' \
-          ))
-          jsonArray=$(toJSONArray ${missingVersions[@]})
-          output versions="${jsonArray}"
+          newUpstreamVersion=$(
+            peelTags \
+              --remote=${GITHUB_SERVER_URL}/fragoi/hello-world.git \
+              --globFilter='v*' \
+              --regexFilter='v[0-9.]+' \
+              | debFilterNextUpver \
+          )
+          output version="$newUpstreamVersion"
 
   upgrade:
     needs: [update]
-    if: ${{ needs.update.outputs.versions != '[]' }}
-    strategy:
-      max-parallel: 1
-      matrix:
-        version: ${{ fromJson(needs.update.outputs.versions) }}
+    if: ${{ needs.update.outputs.version }}
     uses: './.github/workflows/main.yml'
     with:
-      upstream_version: ${{ matrix.version }}
+      upstream_version: ${{ needs.update.outputs.version }}
