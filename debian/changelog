@@ -1,3 +1,9 @@
+hello-world (0.1.10-4) focal jammy noble; urgency=medium
+
+  * release on different distributions
+
+ -- Fra Bot <fragoibot@gmail.com>  Fri, 23 Jan 2026 23:37:32 +0000
+
 hello-world (0.1.10-3) noble; urgency=medium
 
   * use "noble" as base distribution
