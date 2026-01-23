@@ -1,3 +1,9 @@
+hello-world (0.1.10-2) trixie; urgency=medium
+
+  * use new debhelper compat standard
+
+ -- Fra Bot <fragoibot@gmail.com>  Fri, 23 Jan 2026 17:55:45 +0000
+
 hello-world (0.1.10-1) focal; urgency=medium
 
   * upstream version 0.1.10
