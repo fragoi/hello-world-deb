@@ -1,3 +1,9 @@
+hello-world (0.1.10-3) noble; urgency=medium
+
+  * use "noble" as base distribution
+
+ -- Fra Bot <fragoibot@gmail.com>  Fri, 23 Jan 2026 23:01:29 +0000
+
 hello-world (0.1.10-2) trixie; urgency=medium
 
   * use new debhelper compat standard
