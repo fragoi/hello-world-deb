@@ -24,7 +24,7 @@ env:
   GIT_USER_NAME: Fra Bot
   GIT_USER_EMAIL: fragoibot@gmail.com
   DEBPACKAGE: hello-world
-  DEBDIST: focal jammy noble
+  DEBDIST: noble
 
 jobs:
 
