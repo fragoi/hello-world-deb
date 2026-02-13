@@ -1,3 +1,9 @@
+hello-world (0.1.11-1) noble; urgency=medium
+
+  * upstream version 0.1.11
+
+ -- Fra Bot <fragoibot@gmail.com>  Fri, 13 Feb 2026 22:54:53 +0000
+
 hello-world (0.1.10-4) focal jammy noble; urgency=medium
 
   * release on different distributions
