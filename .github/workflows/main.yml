@@ -24,7 +24,6 @@ env:
   GIT_USER_NAME: Fra Bot
   GIT_USER_EMAIL: fragoibot@gmail.com
   DEBPACKAGE: hello-world
-  DEBDIST: noble
 
 jobs:
 
@@ -44,10 +43,21 @@ jobs:
           outputSharedVars NEW_VERSION
 
   notify-ppa:
-    needs: [release]
+    needs: release
     runs-on: ubuntu-latest
     continue-on-error: true
     if: ${{ needs.release.outputs.new_version }}
+    strategy:
+      matrix:
+        dist:
+          - name: noble
+            rev: 24.04
+          - name: oracular
+            rev: 24.10
+          - name: plucky
+            rev: 25.04
+          - name: questing
+            rev: 25.10
     steps:
       - uses: fragoi/bash-actions@v2
       - name: Notify PPA repository
@@ -55,6 +65,9 @@ jobs:
           NEW_VERSION: ${{ needs.release.outputs.new_version }}
           GITHUB_TOKEN: ${{ secrets.PPA_TOKEN }}
         run: |
-          repositoryDispatch fraorg/hello-world-ppa \
-            -f event_type=new_version \
-            -f client_payload[version]="$NEW_VERSION"
+          repositoryDispatch fragoi/ppa-publish \
+            -f event_type=quilt \
+            -f client_payload[package]=${DEBPACKAGE} \
+            -f client_payload[version]=${NEW_VERSION} \
+            -f client_payload[dist]=${{ matrix.dist.name }} \
+            -f client_payload[distrev]=${{ matrix.dist.rev }}
