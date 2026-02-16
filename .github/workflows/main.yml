@@ -51,13 +51,13 @@ jobs:
       matrix:
         dist:
           - name: noble
-            rev: 24.04
+            rev: '24.04'
           - name: oracular
-            rev: 24.10
+            rev: '24.10'
           - name: plucky
-            rev: 25.04
+            rev: '25.04'
           - name: questing
-            rev: 25.10
+            rev: '25.10'
     steps:
       - uses: fragoi/bash-actions@v2
       - name: Notify PPA repository
