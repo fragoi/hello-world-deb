@@ -52,12 +52,10 @@ jobs:
         dist:
           - name: noble
             rev: '24.04'
-          - name: oracular
-            rev: '24.10'
-          - name: plucky
-            rev: '25.04'
           - name: questing
             rev: '25.10'
+          - name: resolute
+            rev: '26.04'
     steps:
       - uses: fragoi/bash-actions@v2
       - name: Notify PPA repository
