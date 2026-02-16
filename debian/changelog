@@ -1,3 +1,9 @@
+hello-world (0.1.11-2) UNRELEASED; urgency=medium
+
+  * publish on different distributions
+
+ -- Fra Bot <fragoibot@gmail.com>  Mon, 16 Feb 2026 18:10:57 +0000
+
 hello-world (0.1.11-1) noble; urgency=medium
 
   * upstream version 0.1.11
