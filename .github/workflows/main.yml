@@ -48,8 +48,11 @@ jobs:
     continue-on-error: true
     if: ${{ needs.release.outputs.new_version }}
     strategy:
+      max-parallel: 1
       matrix:
         dist:
+          - name: jammy
+            rev: '22.04'
           - name: noble
             rev: '24.04'
           - name: questing
