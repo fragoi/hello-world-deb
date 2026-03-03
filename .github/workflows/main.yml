@@ -9,12 +9,6 @@ on:
   repository_dispatch:
     types:
       - new_upstream_version
-  workflow_call:
-    inputs:
-      upstream_version:
-        description: The upstream version
-        required: false
-        type: string
   workflow_dispatch:
 
 permissions:
@@ -36,7 +30,7 @@ jobs:
       - uses: fragoi/bash-actions@v2
       - name: Create release
         run: |
-          debNewVersion "${{ inputs.upstream_version || github.event.client_payload.upstream_version }}"
+          debNewVersion "${{ github.event.client_payload.upstream_version }}"
       - name: Export version
         id: exportVersion
         run: |
